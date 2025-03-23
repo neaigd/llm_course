@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LLM Course</title>
+    <!-- Importando React via CDN -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!-- Estilos CSS inline para layout moderno -->
+    <style>
+      /* Reset básico */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: 'Arial', sans-serif;
+        line-height: 1.6;
+        background: #eaf4f9; /* Fundo mais claro para complementar as cores */
+        color: #333;
+      }
+      :root {
+        --primary-color: #005f5f; /* Verde escuro sólido */
+        --secondary-color: #008787; /* Azul-verde sólido */
+        --background-color: #eaf4f9;
+        --text-color: #333;
+        --card-bg: #005f5f;
+      }
+
+      header {
+        background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        color: #fff;
+        padding: 2rem 1rem;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      header img {
+        max-width: 200px; /* Aumentou o tamanho da logo para 200px */
+        height: auto;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+      .section {
+        margin-bottom: 3rem;
+        background: #fff;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+      .section h2 {
+        margin-bottom: 1rem;
+        color: #005f5f; /* Verde escuro */
+      }
+      .section p {
+        margin-bottom: 1rem;
+      }
+      .section ul {
+        list-style-type: disc;
+        margin-left: 2rem;
+      }
+      .section li {
+        margin-bottom: 0.5rem;
+      }
+      .cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .card {
+        flex: 1;
+        min-width: 250px;
+        background: var(--card-bg);
+        padding: 1.5rem;
+        border-radius: 8px;
+        transition: transform 0.2s, box-shadow 0.2s;
+        color: #fff; /* Texto branco para melhor legibilidade */
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      }
+      .card h3 {
+        margin-bottom: 0.5rem;
+        color: #fff; /* Manter texto branco */
+      }
+      .btn {
+        display: inline-block;
+        background: var(--primary-color);
+        color: #fff;
+        padding: 0.75rem 1.5rem;
+        text-decoration: none;
+        border-radius: 4px;
+        margin-top: 1rem;
+        transition: background 0.3s;
+      }
+      .btn:hover {
+        background: #004444; /* Sombra do verde escuro */
+      }
+      footer {
+        text-align: center;
+        padding: 1rem;
+        background: var(--primary-color);
+        color: #fff;
+      }
+      @media (max-width: 768px) {
+        header img {
+          max-width: 150px; /* Reduz o tamanho da logo para 150px em telas menores */
+        }
+        .cards {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- Código React escrito em Babel -->
+    <script type="text/babel">
+      // Componente Header
+      const Header = () => (
+        <header>
+          <img src="https://raw.githubusercontent.com/neaigd/llm_course/main/LogoNIAD.png" alt="Logo NIAD" style={{ maxWidth: '180px' }} />
+        </header>
+      );
+
+      // Componente Section que recebe título e conteúdo
+      const Section = ({ title, children }) => (
+        <section className="section">
+          <h2>{title}</h2>
+          {children}
+        </section>
+      );
+
+      // Componente Card para exibir as seções principais do curso
+      const Card = ({ title, description, image, link }) => (
+        <div className="card">
+          {image && <img src={image} alt={title} style={{ width: '100%', borderRadius: '4px' }} />}
+          <h3>{title}</h3>
+          <p>{description}</p>
+          {link && (
+            <a className="btn" href={link} target="_blank" rel="noopener noreferrer">
+              Saiba Mais
+            </a>
+          )}
+        </div>
+      );
+
+      // Componente para a nova sessão de Matemática para Machine Learning
+      const MathForMLSection = () => (
+        <section className="section">
+          <h2>Matemática para Machine Learning</h2>
+          <p>
+            Antes de dominar machine learning, é importante entender os conceitos matemáticos fundamentais que impulsionam esses algoritmos.
+          </p>
+          <ul>
+            <li>
+              <strong>Álgebra Linear</strong>: Crucial para entender muitos algoritmos, especialmente em deep learning. Conceitos-chave incluem vetores, matrizes, determinantes, autovalores e autovetores, espaços vetoriais e transformações lineares.
+            </li>
+            <li>
+              <strong>Cálculo</strong>: Muitos algoritmos envolvem otimização de funções contínuas, exigindo conhecimento de derivadas, integrais, limites e séries. Cálculo multivariável e gradientes também são importantes.
+            </li>
+            <li>
+              <strong>Probabilidade e Estatística</strong>: Essenciais para entender como modelos aprendem com dados e fazem previsões. Conceitos-chave incluem teoria da probabilidade, variáveis aleatórias, distribuições, esperança, variância, covariância, testes de hipóteses, intervalos de confiança, máxima verossimilhança e inferência bayesiana.
+            </li>
+          </ul>
+          <h3>📚 Recursos:</h3>
+          <ul>
+            <li>
+              <a href="https://www.youtube.com/watch?v=fNk_zzaMoSs&list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank" rel="noopener noreferrer">
+                3Blue1Brown - The Essence of Linear Algebra
+              </a>: Série de vídeos com intuição geométrica para esses conceitos.
+            </li>
+            <li>
+              <a href="https://www.youtube.com/watch?v=qBigTkBLU6g&list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9" target="_blank" rel="noopener noreferrer">
+                StatQuest with Josh Starmer - Statistics Fundamentals
+              </a>: Explicações claras de conceitos estatísticos.
+            </li>
+            <li>
+              <a href="https://automata88.medium.com/list/cacc224d5e7d" target="_blank" rel="noopener noreferrer">
+                AP Statistics Intuition by Ms Aerin
+              </a>: Artigos no Medium sobre intuição por trás de distribuições de probabilidade.
+            </li>
+            <li>
+              <a href="https://immersivemath.com/ila/learnmore.html" target="_blank" rel="noopener noreferrer">
+                Immersive Linear Algebra
+              </a>: Interpretação visual de álgebra linear.
+            </li>
+            <li>
+              <a href="https://www.khanacademy.org/math/linear-algebra" target="_blank" rel="noopener noreferrer">
+                Khan Academy - Linear Algebra
+              </a>: Ideal para iniciantes.
+            </li>
+            <li>
+              <a href="https://www.khanacademy.org/math/calculus-1" target="_blank" rel="noopener noreferrer">
+                Khan Academy - Calculus
+              </a>: Cobre o básico de cálculo.
+            </li>
+            <li>
+              <a href="https://www.khanacademy.org/math/statistics-probability" target="_blank" rel="noopener noreferrer">
+                Khan Academy - Probability and Statistics
+              </a>: Material em formato acessível.
+            </li>
+          </ul>
+        </section>
+      );
+
+      // Componente para a nova sessão de Python para Machine Learning
+      const PythonForMLSection = () => (
+        <section className="section">
+          <h2>Python para Machine Learning</h2>
+          <p>
+            Python é uma linguagem poderosa para machine learning devido à sua legibilidade e ecossistema de bibliotecas.
+          </p>
+          <ul>
+            <li>
+              <strong>Básico de Python</strong>: Sintaxe, tipos de dados, tratamento de erros e programação orientada a objetos.
+            </li>
+            <li>
+              <strong>Bibliotecas para Data Science</strong>: NumPy (operações numéricas), Pandas (manipulação de dados), Matplotlib e Seaborn (visualização).
+            </li>
+            <li>
+              <strong>Pré-processamento de Dados</strong>: Normalização, tratamento de dados ausentes, codificação de dados categóricos e divisão de dados.
+            </li>
+            <li>
+              <strong>Bibliotecas de Machine Learning</strong>: Scikit-learn para algoritmos supervisionados/não supervisionados (regressão, árvores de decisão, PCA, etc.).
+            </li>
+          </ul>
+          <h3>📚 Recursos:</h3>
+          <ul>
+            <li>
+              <a href="https://realpython.com/" target="_blank" rel="noopener noreferrer">
+                Real Python
+              </a>: Tutoriais abrangentes de Python.
+            </li>
+            <li>
+              <a href="https://www.youtube.com/watch?v=rfscVS0vtbw" target="_blank" rel="noopener noreferrer">
+                freeCodeCamp - Learn Python
+              </a>: Introdução completa aos conceitos de Python.
+            </li>
+            <li>
+              <a href="https://jakevdp.github.io/PythonDataScienceHandbook/" target="_blank" rel="noopener noreferrer">
+                Python Data Science Handbook
+              </a>: Livro digital gratuito.
+            </li>
+          </ul>
+        </section>
+      );
+
+      // Componente App principal
+      const App = () => {
+        return (
+          <div>
+            <Header />
+            <div className="container">
+              <Section title="Curso de Large Language Models">
+                <p>
+                  Cumprindo com nosso compromisso de oferecer acesso gratuito a materiais de formação e estudo, o Núcleo de Estudos de AI Generativa Aplicada ao Direito realizou uma pesquisa aprofundada e selecionou um repositório valioso, contendo recursos de instituições renomadas. Todo o conteúdo é gratuito e Open Source. A tarefa é desafiadora, especialmente para os profissionais da área do Direito que decidirem se aventurar nesse campo. Por isso, fizemos uma tradução na apresentação e aproveitamos para aprender a criar uma página na internet. Tudo no nosso estilo: fazendo e aprendendo em público.
+                </p>
+                <p>
+                  O curso está dividido em três partes principais:
+                  <br /><br />
+                  <strong>🧩 LLM Fundamentals:</strong> Fundamentos em matemática, Python e redes neurais.
+                  <br />
+                  <strong>🧑‍🔬 The LLM Scientist:</strong> Técnicas avançadas para construir LLMs de alta performance.
+                  <br />
+                  <strong>👷 The LLM Engineer:</strong> Desenvolvimento de aplicações práticas utilizando LLMs.
+                </p>
+                <a className="btn" href="https://openlm.ai/llm-course/" target="_blank" rel="noopener noreferrer">
+                  Acesse o Curso Completo
+                </a>
+              </Section>
+
+              <Section title="Principais Seções">
+                <div className="cards">
+                  <Card
+                    title="LLM Fundamentals"
+                    description="Fundamentos essenciais em matemática, Python e redes neurais para compreender LLMs."
+                    image="https://openlm.ai/assets/blog/llm-course/roadmap_fundamentals.png"
+                  />
+                  <Card
+                    title="The LLM Scientist"
+                    description="Aprenda técnicas avançadas para construir e otimizar modelos de linguagem."
+                    image="https://openlm.ai/assets/blog/llm-course/roadmap_scientist.png"
+                  />
+                  <Card
+                    title="The LLM Engineer"
+                    description="Desenvolva aplicações robustas e eficientes utilizando as potencialidades dos LLMs."
+                    image="https://openlm.ai/assets/blog/llm-course/roadmap_engineer.png"
+                  />
+                </div>
+              </Section>
+
+              <Section title="Recursos e Notebooks">
+                <p>
+                  Explore os diversos notebooks e artigos interativos para aprofundar seus conhecimentos. Cada recurso foi criado para facilitar a prática e a implementação dos conceitos abordados no curso.
+                </p>
+                <a className="btn" href="https://github.com/mlabonne/llm-course" target="_blank" rel="noopener noreferrer">
+                  Veja os Recursos no GitHub
+                </a>
+              </Section>
+
+              <MathForMLSection />
+
+              <PythonForMLSection />
+            </div>
+            <footer>
+              <p>&copy; 2025 LLM Course - Todos os direitos reservados.</p>
+            </footer>
+          </div>
+        );
+      };
+
+      // Renderizando o App no elemento com id "root"
+      ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+  </body>
+</html>
