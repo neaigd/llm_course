@@ -31,7 +31,7 @@
       }
 
       header {
-        background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        background: #008787; /* Cor sólida única para simplicidade */
         color: #fff;
         padding: 2rem 1rem;
         text-align: center;
@@ -40,8 +40,9 @@
         justify-content: center;
       }
       header img {
-        max-width: 200px; /* Aumentou o tamanho da logo para 200px */
+        max-width: 200px;
         height: auto;
+        filter: brightness(1.1); /* Ajuste de brilho para cores mais fiéis */
       }
       .container {
         max-width: 1200px;
@@ -77,11 +78,11 @@
       .card {
         flex: 1;
         min-width: 250px;
-        background: var(--card-bg);
+        background: linear-gradient(135deg, #006666, #004d4d); /* Gradiente vertical */
         padding: 1.5rem;
         border-radius: 8px;
         transition: transform 0.2s, box-shadow 0.2s;
-        color: #fff; /* Texto branco para melhor legibilidade */
+        color: #fff;
       }
       .card:hover {
         transform: translateY(-5px);
@@ -127,7 +128,7 @@
       // Componente Header
       const Header = () => (
         <header>
-          <img src="https://raw.githubusercontent.com/neaigd/llm_course/main/LogoNIAD.png" alt="Logo NIAD" style={{ maxWidth: '180px' }} />
+          <img src="logo.png" alt="Logo NIAD" style={{ maxWidth: '200px' }} />
         </header>
       );
 
